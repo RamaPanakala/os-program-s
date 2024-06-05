@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+int main() {
+    int i, j, n, a[50], frame[10], no, k, avail, count = 0;
+
+    printf("Enter the Number of Pages: ");
+    scanf("%d", &n);
+
+    printf("Enter the Page Number: \n");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    printf("Enter the Number of Frames: ");
+    scanf("%d", &no);
+
+    for (i = 0; i < no; i++) {
+        frame[i] = -1;  // Initialize frames to -1 to indicate they are empty
+    }
+
+    j = 0;
+    printf("\nRet String\t\tPage frames\n");
+
+    for (i = 0; i < n; i++) {
+        printf(" %d\t\t", a[i]);
+        avail = 0;
+
+        for (k = 0; k < no; k++) {
+            if (frame[k] == a[i]) {
+                avail = 1;
+                break;
+            }
+        }
+
+        if (avail == 0) {
+            frame[j] = a[i];
+            j = (j + 1) % no;
+            count++;
+        }
+
+        for (k = 0; k < no; k++) {
+            if (frame[k] != -1)
+                printf("%d ", frame[k]);
+            else
+                printf("-1 ");
+        }
+        printf("\n");
+    }
+
+    
+    return 0;
+}
+
+
+output::
+
+Enter the Number of Pages: 2
+Enter the Page Number: 
+3
+4
+Enter the Number of Frames: 5
+
+Ret String		Page frames
+ 3	3 		-1 -1 -1 -1 
+ 4	3 		4 -1 -1 -1 
